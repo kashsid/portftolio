@@ -25,6 +25,7 @@ const styles = theme => ({
     },
     card: {
         maxWidth: 400,
+        minHeight:375,
     },
     media: {
         height: 0,
@@ -59,8 +60,7 @@ class ProjectItem extends Component {
         const { classes } = this.props;
 
         return (
-            <Grid item xs={12}>
-                <Grid container className={classes.root} justify="center" spacing={16}>
+            <Grid item xs={12} sm={4}>
                     <Card className={classes.card}>
                         <CardHeader
                             avatar={
@@ -73,18 +73,17 @@ class ProjectItem extends Component {
                                     <MoreVertIcon />
                                 </IconButton>
                             }
-                            title="Shrimp and Chorizo Paella"
-                            subheader="September 14, 2016"
+                        title={this.props.project.name}
+                        subheader={this.props.project.date_completed = new Date().getMonth() + 1 + '/' + new Date().getDate() + '/' + new Date().getFullYear()}
                         />
                         <CardMedia
                             className={classes.media}
-                            image="/static/images/cards/paella.jpg"
-                            title="Paella dish"
+                            image={this.props.project.thumbnail}
+                            title={this.props.project.name}
                         />
                         <CardContent>
                             <Typography component="p">
-                                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                            {this.props.project.description}
                                 </Typography>
                         </CardContent>
                         <CardActions className={classes.actions} disableActionSpacing>
@@ -134,7 +133,7 @@ class ProjectItem extends Component {
                         </Collapse>
                     </Card>
                 </Grid>
-            </Grid>
+            
         );
     }
 }
