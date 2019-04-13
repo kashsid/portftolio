@@ -60,10 +60,14 @@ class AdminForm extends Component {
             },
         ],
         selectedTag: '',
-        description: '',
         gitHubUrl: '',
         websiteUrl: '',
+        description: '',
     
+    }
+    componentDidMount = () => {
+        this.props.dispatch({ type: 'FETCH_TAGS' });
+        
     }
 
     handleChange = (property) => (event) => {
@@ -75,6 +79,15 @@ class AdminForm extends Component {
 
     handleSubmit = () => {
         // your submit logic
+        this.props.dispatch({ type: 'POST_PROJECT', payload: this.state });
+        this.setState({
+            name: '',
+            selectedDate: new Date(),
+            selectedTag: '',
+            gitHubUrl: '',
+            websiteUrl: '',
+            description: '',
+        });
     }
 
 
@@ -137,8 +150,8 @@ class AdminForm extends Component {
                                     fullWidth
                                     label="Select a tag"
                                     className={classes.textField}
-                                    value={this.state.currency}
-                                    onChange={this.handleChange('currency')}
+                                    value={this.state.selectedTag}
+                                    onChange={this.handleChange('selectedTag')}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.menu,
@@ -150,9 +163,9 @@ class AdminForm extends Component {
                                     margin="normal"
                                     variant="outlined"
                                 >
-                                    {this.state.currencies.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
+                                    {this.props.tags.map(option => (
+                                        <MenuItem key={option.id} value={option.id}>
+                                            {option.name}
                                         </MenuItem>
                                     ))}
                                 </TextValidator>

@@ -3,7 +3,7 @@ import NavBar from '../NavBar/NavBar';
 import './ProjectPage.css';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import ProjectList from './ProjectList';
 
 const styles = {
@@ -40,9 +40,9 @@ class ProjectPage extends Component {
         );
     }
 }
-ProjectPage.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
+// ProjectPage.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };
 
 
 export default withStyles(styles)(ProjectPage);

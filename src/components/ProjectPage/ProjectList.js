@@ -21,10 +21,7 @@ const styles = theme => ({
  class ProjectList extends Component {
 
      componentDidMount = () => {
-         this.getProjects();
-     }
-
-     getProjects() {
+         
          this.props.dispatch({ type:'FETCH_PROJECTS' });
      }
   render() {
