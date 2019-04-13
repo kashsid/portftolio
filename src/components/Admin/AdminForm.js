@@ -10,18 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import classNames from 'classnames';
 
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 40,
-    },
-    container: {
-        maxWidth: 700,
-        // minWidth: 400,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
+    
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
@@ -102,8 +91,7 @@ class AdminForm extends Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.root}>
-                <div className={classes.container}>
+           
 
                     <ValidatorForm
                         ref="form"
@@ -222,15 +210,15 @@ class AdminForm extends Component {
                             </Grid>
                         </Grid>
                     </ValidatorForm>
-                </div>
-            </div>
+               
+            
         );
     }
 }
 
-AdminForm.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
+// AdminForm.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };
 
 
 export default withStyles(styles)(AdminForm); 
