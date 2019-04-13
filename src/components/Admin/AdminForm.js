@@ -32,7 +32,10 @@ const styles = theme => ({
     fontSize: 20,
     opacity: 0.9,
     marginRight: theme.spacing.unit
-  }
+  },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class AdminForm extends Component {

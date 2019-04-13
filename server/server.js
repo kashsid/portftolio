@@ -12,6 +12,7 @@ app.use(express.static("build"));
 
 /** ---------- ROUTES ---------- **/
 app.use("/project", projectRouter);
+app.use('/tag', tagRouter);
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function() {
