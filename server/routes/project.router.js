@@ -42,4 +42,14 @@ router.post("/", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.delete('/:id', (req, res) => {
+    console.log(req.params.id);
+    pool.query(`DELETE FROM "projects" WHERE "id" IN ($1);`, [req.params.id]).then(() => {
+        res.sendStatus(204);
+    }).catch((error) => {
+        console.log('errors with project delete query', error);
+        res.sendStatus(500);
+    })
+});
 module.exports = router;

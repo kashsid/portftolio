@@ -28,6 +28,11 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 8,
         overflowX: 'auto',
     },
+    iconHover: {
+        '&:hover': {
+            color: theme.palette.primary.main,
+        },
+    },
 });
 
 
@@ -37,7 +42,10 @@ class AdminTable extends Component {
         this.props.dispatch({ type: 'FETCH_PROJECTS' });
     }
 
-
+    handleClick = id => () => {
+        console.log('delete click for id', id);
+        this.props.dispatch({ type: 'DELETE_PROJECT', payload: id });
+    }
     render() {
 
         const { classes } = this.props;
@@ -60,9 +68,11 @@ class AdminTable extends Component {
                                 <CustomTableCell component="th" scope="row">
                                     {row.name}
                                 </CustomTableCell>
-                                <CustomTableCell style={{ width: '10%' }} align="right"><IconButton aria-label="Delete" color="primary">
-                                    <DeleteIcon />
-                                </IconButton></CustomTableCell>
+                                <CustomTableCell style={{ width: '10%' }} align="right">
+                                    <IconButton className={classes.iconHover} onClick={this.handleClick(row.id)} aria-label="Delete">
+                                        <DeleteIcon />
+                                    </IconButton></CustomTableCell>
+                                
                                 {/* <CustomTableCell align="right">{row.fat}</CustomTableCell>
                                 <CustomTableCell align="right">{row.carbs}</CustomTableCell>
                                 <CustomTableCell align="right">{row.protein}</CustomTableCell> */}
