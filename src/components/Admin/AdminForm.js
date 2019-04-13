@@ -46,25 +46,35 @@ class AdminForm extends Component {
         selectedDate: new Date(),
         currencies: [
             {
-                value: 'USD',
+                value: 'React',
                 label: 'React',
             },
             {
-                value: 'EUR',
+                value: 'Javascript',
                 label: 'Javascript',
             },
             {
-                value: 'BTC',
-                label: '฿',
+                value: 'Redux',
+                label: 'Redux',
             },
             {
-                value: 'JPY',
-                label: '¥',
+                value: 'jQuery',
+                label: 'jQuery',
+            },
+            {
+                value: 'Material-UI',
+                label: 'Material',
+            },
+            {
+                value: 'Bootstrap',
+                label: 'Bootstrap',
             },
         ],
+        selectedTag: '',
         description: '',
         gitHubUrl: '',
         websiteUrl: '',
+    
     }
 
     handleChange = (property) => (event) => {

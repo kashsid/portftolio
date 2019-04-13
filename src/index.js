@@ -2,17 +2,65 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.js';
+import axios from 'axios'
+
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import { takeEvery, put } from 'redux-saga/effects';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
+// Create SAGAS 
+
+function* getProjects() {
+    try {
+        const projects = yield axios.get('/project');
+        console.log(projects.data);
+        yield put({ type: 'SET_PROJECTS', paylod: projects.data });
+    }
+    catch (err) {
+        console.log(`couldn't fetch projects`, err);
+    }
+}
+// Get Tags
+function* getTags() {
+    try {
+        const projects = yield axios.get('/tag');
+        yield put({ type: 'SET_TAGS', paylod: projects.data });
+    }
+    catch (err) {
+        console.log(`couldn't fetch tags`, err);
+    }
+}
+// Post Projects
+function* addProject(action) {
+    try {
+        yield axios.post('/project', action.paylod);
+        yield put({ type: 'FETCH_PROJECTS' });
+    }
+    catch (err) {
+        console.log(`couldn't add project`, err);
+    }
+}
+// Delete Code 
+function* deleteProject(action) {
+    try {
+        yield axios.delete('/project/' + action.payload.id);
+        yield put({ type: 'FETCH_PROJECTS' });
+    }
+    catch (err) {
+        console.log(`couldn't delete project`, err);
+    }
+}
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery('FETCH_PROJECTS', getProjects);
+    yield takeEvery('FETCH_TAGS', getTags);
+    yield takeEvery('POST_PROJECT', addProject);
+    yield takeEvery('DELETE_PROJECT', deleteProject);
 }
 
 // Create sagaMiddleware
@@ -22,6 +70,8 @@ const sagaMiddleware = createSagaMiddleware();
 const projects = (state = [], action) => {
     switch (action.type) {
         case 'SET_PROJECTS':
+            console.log(action.payload);
+        
             return action.payload;
         default:
             return state;
