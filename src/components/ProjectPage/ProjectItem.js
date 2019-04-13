@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
@@ -50,96 +51,125 @@ const styles = theme => ({
 });
 
 class ProjectItem extends Component {
-    state = { expanded: false };
 
-    handleExpandClick = () => {
-        this.setState(state => ({ expanded: !state.expanded }));
+    state = {
+        expanded: false,
+        heartToggle: false,
     };
+
+    // for potential future use    
+    // handleExpandClick = () => {
+    //     this.setState(state => ({ expanded: !state.expanded }));
+    // };
+
+    // formats date on card
+    formatDate = () => {
+        const date = this.props.project.date_completed;
+        return new Date(date).getMonth() + 1 + '/' +
+            new Date(date).getDate() + '/' +
+            new Date(date).getFullYear()
+    }
+
+    // toggles state of heart button icon when clicked and determines which version of icon is displayed on DOM     
+    toggleHeart = () => {
+        if (!this.state.heartToggle) {
+            this.setState({
+                heartToggle: true,
+            })
+        } else {
+            this.setState({
+                heartToggle: false,
+            })
+        }
+    }
+
+    // outputs version of heart icon to DOM based on current state of 'heartToggle'
+    displayHeart = () => {
+        if (this.state.heartToggle) {
+            return <FavoriteIcon style={{ color: '#c95f76' }} />
+        }
+        else {
+            return <FavoriteIcon />
+        }
+    }
+
 
     render() {
         const { classes } = this.props;
 
         return (
             <Grid item xs={12} sm={4}>
-                    <Card className={classes.card}>
-                        <CardHeader
-                            avatar={
-                                <Avatar aria-label="Recipe" className={classes.avatar}>
-                                    GH
-                                </Avatar>
-                            }
-                            action={
-                                <IconButton>
-                                    <MoreVertIcon />
-                                </IconButton>
-                            }
+                <Card className={classes.card}>
+                    <CardHeader
+                        avatar={
+                            <Avatar style={{ marginRight: '-49px' }} aria-label="initials" className={classes.avatar} src="/images/44652804.jpeg">
+                            </Avatar>
+                        }
+                        // for potential future use
+                        // action={
+                        //     <IconButton>
+                        //         <MoreVertIcon />
+                        //     </IconButton>
+                        // }
                         title={this.props.project.name}
-                        subheader={this.props.project.date_completed = new Date().getMonth() + 1 + '/' + new Date().getDate() + '/' + new Date().getFullYear()}
-                        />
+                        subheader={this.formatDate()}
+                    />
+                    <div className="card-image">
                         <CardMedia
+                            style={{ height: '60px' }}
                             className={classes.media}
                             image={this.props.project.thumbnail}
                             title={this.props.project.name}
                         />
-                        <CardContent>
-                            <Typography component="p">
+                    </div>
+                    <CardContent style={{ marginTop: '3px', marginBottom: '3px', height: '90px' }}>
+                        <Typography component="p">
                             {this.props.project.description}
-                                </Typography>
-                        </CardContent>
-                        <CardActions className={classes.actions} disableActionSpacing>
-                            <IconButton aria-label="Add to favorites">
-                                <FavoriteIcon />
-                            </IconButton>
-                            <IconButton aria-label="Share">
-                                <ShareIcon />
-                            </IconButton>
+                        </Typography>
+                    </CardContent>
+                    <CardActions className={classes.actions} disableActionSpacing>
+                        <IconButton aria-label="Add to favorites" onClick={this.toggleHeart}>
+                            {this.displayHeart()}
+                        </IconButton>
+                        <IconButton aria-label="github" >
+                            <a href={!this.props.project.github ? "https://github.com" : this.props.project.github}
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github fa-lg"></i>
+                            </a>
+                        </IconButton>
+                        <Typography style={{ marginRight: '8px', marginLeft: '4px' }}>tags: </Typography>
+                        <Chip label={this.props.project.tag_name} className={classes.chip} variant="outlined" />
+                        {/* 
+                            // for potential future use
                             <IconButton
-                                className={classnames(classes.expand, {
-                                    [classes.expandOpen]: this.state.expanded,
-                                })}
-                                onClick={this.handleExpandClick}
-                                aria-expanded={this.state.expanded}
-                                aria-label="Show more"
-                            >
-                                <ExpandMoreIcon />
-                            </IconButton>
-                        </CardActions>
+                            className={classnames(classes.expand, {
+                                [classes.expandOpen]: this.state.expanded,
+                            })}
+                            onClick={this.handleExpandClick}
+                            aria-expanded={this.state.expanded}
+                            aria-label="Show more"
+                        >
+                            <ExpandMoreIcon />
+                        </IconButton> */}
+
+                    </CardActions>
+                    {/* 
+                        // for potential future use
                         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                            <CardContent>
-                                <Typography paragraph>Method:</Typography>
-                                <Typography paragraph>
-                                    Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                                    minutes.
-                                    </Typography>
-                                <Typography paragraph>
-                                    Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                                    heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                                    browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-                                    chicken and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion,
-                                    salt and pepper, and cook, stirring often until thickened and fragrant, about 10
-                                    minutes. Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                                    </Typography>
-                                <Typography paragraph>
-                                    Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-                                    without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat
-                                    to medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-                                    cook again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                                    minutes more. (Discard any mussels that don’t open.)
-                                    </Typography>
-                                <Typography>
-                                    Set aside off of the heat to let rest for 10 minutes, and then serve.
-                                    </Typography>
-                            </CardContent>
-                        </Collapse>
-                    </Card>
-                </Grid>
+                        <CardContent>
+                            <Typography paragraph>TBD</Typography>
+                            <Typography paragraph>
             
+                                    </Typography>
+                            <Typography paragraph>
+                
+                                    </Typography>
+                        </CardContent>
+                    </Collapse> */}
+                </Card>
+            </Grid>
         );
     }
 }
-
-ProjectItem.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(ProjectItem);
