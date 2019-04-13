@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 //import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import classNames from 'classnames';
 import Snackbar from '@material-ui/core/Snackbar';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@material-ui/icons/Error';
 
 const styles = theme => ({
     
@@ -107,7 +109,19 @@ class AdminForm extends Component {
     handleClose = () => {
         this.props.dispatch({ type: 'RESET_POST' })
     };
+    alertMessage = () => {
+        const { classes } = this.props;
+        // console.log('confirmPost', this.props.confirmPost);
 
+        if (this.props.confirmPost.status) {
+            return <span id="message-id" style={{ display: 'flex', alignItems: 'center' }}>
+                <CheckCircleIcon className={classes.icon} />Project Successfully Added!</span>
+        }
+        else {
+            return <span id="message-id" style={{ display: 'flex', alignItems: 'center' }}>
+                <ErrorIcon className={classes.icon} />Project add was unsuccessful</span>
+        }
+    }
     // Renders the entire app on the DOM
     render() {
         const { classes } = this.props;
@@ -244,13 +258,13 @@ class AdminForm extends Component {
                         vertical: 'bottom',
                         horizontal: 'left',
                     }}
-                    open={this.props.confirmPost}
+                    open={this.props.confirmPost.open}
                     autoHideDuration={6000}
                     onClose={this.handleClose}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id" style={{ display: 'flex', alignItems: 'center' }}><CheckCircleIcon className={classes.icon} />Project Successfully Added!</span>}
+                    message={this.alertMessage()}
                 />
             </>
         );
