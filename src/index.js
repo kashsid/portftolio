@@ -106,7 +106,7 @@ const confirmPost = (state = false, action) => {
     case 'RESET_POST':
       return {
         open: false,
-      };;
+      };
     default:
       return state;
   }

@@ -1,0 +1,20 @@
+a:link {
+  color: #333333;
+}
+
+a:visited {
+  color: #333333;
+}
+
+a:hover {
+  color: white;
+}
+
+.card-image {
+    filter: grayscale(100%);
+    transition: all .2s;
+}
+
+.card-image:hover {
+    filter: grayscale(0%);
+}

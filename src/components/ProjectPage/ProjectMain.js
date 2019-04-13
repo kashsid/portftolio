@@ -35,6 +35,7 @@ class ProjectPage extends Component {
           <div className="github-logo">
             <img
               src="/images/GitHub-Mark-Light-120px-plus.png"
+              //src="/images/github1.png"
               alt="github logo"
             />
             <Typography variant="h5" color="inherit" className={classes.grow}>

@@ -4,8 +4,9 @@ const pool = require("../modules/pool");
 
 // will return all items from "projects" table on database ordered ascending by "date"
 router.get("/", (req, res) => {
-  pool
-    .query(`SELECT * FROM "projects" ORDER BY "date_completed" Desc;`)
+  pool.query(`SELECT "projects"."id","projects"."name", "description", "thumbnail", "website", "github", "date_completed", "tag_id", "tags"."name" as "tag_name" FROM "projects"
+    JOIN "tags" ON "tags"."id"="tag_id"
+    ORDER BY "date_completed" DESC;`)
     .then(result => {
       projects = result.rows;
       console.log(projects);

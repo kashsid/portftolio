@@ -1,22 +1,17 @@
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
-import classnames from "classnames";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import './ProjectItem.css';
 
 const styles = theme => ({
   root: {
@@ -26,7 +21,8 @@ const styles = theme => ({
   card: {
     maxWidth: 400,
     // minHeight: 375,
-    backgroundColor: "rgba(51, 171, 159, 0.323)"
+   // backgroundColor: "rgba(51, 171, 159, 0.323)"
+    backgroundColor: "#a5d6a7"
   },
   media: {
     height: 0,
@@ -75,24 +71,26 @@ class ProjectItem extends Component {
   };
 
   toggleHeart = () => {
-    if (!this.state.toggle) {
+    if (!this.state.heartToggle) {
       this.setState({
-        toggle: true
-      });
+        heartToggle: true,
+      })
     } else {
       this.setState({
-        toggle: false
-      });
+        heartToggle: false,
+      })
     }
-  };
+  }
 
+  // outputs version of heart icon to DOM based on current state of 'heartToggle'
   displayHeart = () => {
-    if (this.state.toggle) {
-      return <FavoriteIcon style={{ color: "#c95f76" }} />;
-    } else {
-      return <FavoriteIcon />;
+    if (this.state.heartToggle) {
+      return <FavoriteIcon style={{ color: '#d50000' }} />
     }
-  };
+    else {
+      return <FavoriteIcon />
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -102,12 +100,8 @@ class ProjectItem extends Component {
         <Card className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar
-                style={{ marginRight: "-49px" }}
-                aria-label="initials"
-                className={classes.avatar}
-                src="/images/44652804.jpeg"
-              />
+              <Avatar style={{ marginRight: '-49px' }} aria-label="initials" className={classes.avatar} src="/images/kash.png">
+              </Avatar>
             }
             // for potential future use
             // action={
@@ -120,47 +114,29 @@ class ProjectItem extends Component {
           />
           <div className="card-image">
             <CardMedia
-              style={{ height: "60px" }}
+              style={{ height: '60px' }}
               className={classes.media}
               image={this.props.project.thumbnail}
               title={this.props.project.name}
             />
           </div>
-          <CardContent
-            style={{ marginTop: "3px", marginBottom: "3px", height: "90px" }}
-          >
+          <CardContent style={{ marginTop: '3px', marginBottom: '3px', height: '90px' }}>
             <Typography component="p">
               {this.props.project.description}
             </Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton
-              aria-label="Add to favorites"
-              onClick={this.toggleHeart}
-            >
+            <IconButton aria-label="Add to favorites" onClick={this.toggleHeart}>
               {this.displayHeart()}
             </IconButton>
-            <IconButton aria-label="github">
-              <a
-                href={
-                  !this.props.project.github
-                    ? "https://github.com"
-                    : this.props.project.github
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-github fa-lg" />
+            <IconButton aria-label="github" >
+              <a href={!this.props.project.github ? "https://github.com" : this.props.project.github}
+                target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github fa-lg"></i>
               </a>
             </IconButton>
-            <Typography style={{ marginRight: "8px", marginLeft: "4px" }}>
-              tags:{" "}
-            </Typography>
-            <Chip
-              label={this.props.project.tag_name}
-              className={classes.chip}
-              variant="outlined"
-            />
+            <Typography style={{ marginRight: '8px', marginLeft: '4px' }}>tags: </Typography>
+            <Chip label={this.props.project.tag_name} className={classes.chip} variant="outlined" />
             {/* 
                             // for potential future use
                             <IconButton
@@ -173,6 +149,7 @@ class ProjectItem extends Component {
                         >
                             <ExpandMoreIcon />
                         </IconButton> */}
+
           </CardActions>
           {/* 
                         // for potential future use
@@ -192,5 +169,6 @@ class ProjectItem extends Component {
     );
   }
 }
+
 
 export default withStyles(styles)(ProjectItem);
