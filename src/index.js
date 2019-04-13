@@ -40,6 +40,7 @@ function* addProject(action) {
     try {
         yield axios.post('/project', action.paylod);
         yield put({ type: 'FETCH_PROJECTS' });
+        yield put({ type: 'CONFIRM_POST' });
     }
     catch (err) {
         console.log(`couldn't add project`, err);
@@ -93,10 +94,22 @@ const storeInstance = createStore(
     combineReducers({
         projects,
         tags,
+        confirmPost,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
+
+const confirmPost = (state = false, action) => {
+    switch (action.type) {
+        case 'CONFIRM_POST':
+            return true;
+        case 'RESET_POST':
+            return false;
+        default:
+            return state;
+    }
+}
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
