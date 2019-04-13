@@ -25,11 +25,12 @@ const styles = theme => ({
   },
   card: {
     maxWidth: 400,
-    minHeight: 375
+    // minHeight: 375,
+    backgroundColor: "rgba(51, 171, 159, 0.323)"
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "67.25%" // 16:9,
   },
   actions: {
     display: "flex"
@@ -52,7 +53,7 @@ const styles = theme => ({
 class ProjectItem extends Component {
   state = {
     expanded: false,
-    heartToggle: false
+    toggle: false
   };
 
   // for potential future use
@@ -73,22 +74,20 @@ class ProjectItem extends Component {
     );
   };
 
-  // toggles state of heart button icon when clicked and determines which version of icon is displayed on DOM
   toggleHeart = () => {
-    if (!this.state.heartToggle) {
+    if (!this.state.toggle) {
       this.setState({
-        heartToggle: true
+        toggle: true
       });
     } else {
       this.setState({
-        heartToggle: false
+        toggle: false
       });
     }
   };
 
-  // outputs version of heart icon to DOM based on current state of 'heartToggle'
   displayHeart = () => {
-    if (this.state.heartToggle) {
+    if (this.state.toggle) {
       return <FavoriteIcon style={{ color: "#c95f76" }} />;
     } else {
       return <FavoriteIcon />;

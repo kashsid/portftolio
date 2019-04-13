@@ -10,8 +10,8 @@
     to top,
     /* rgba(0, 150, 136, 0.4),
     rgba(0, 150, 136, 1) */
-     rgba(150, 0, 22, 0.632),
-    rgba(31, 3, 11, 0.975)
+     rgba(118, 18, 18, 0.632),
+    rgba(40, 2, 2, 0.975)
   );
   /* background-color: linear-gradient(rgba(199, 199, 199, 0.1), rgba(114, 114, 114, 0.9)); */
   /* opacity: .7; */
@@ -27,6 +27,6 @@
   background-position: center top;
   background-repeat: no-repeat;
   text-align: center;
-  height: 200vh;
+  height: 250vh;
   background-color: #ececec;
 }

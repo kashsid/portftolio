@@ -1,20 +1,20 @@
 1- Project Page
- Client side route that displays projects that are stored in the database
+ Client side route that displays projects that are stored in the database---X
  Each project should conditionally render a name, description, thumbnail, website, date complete and a tag. Many of the fields are optional, only show properties that aren't null.
- Include a link to GitHub that opens in a new window
- Add your name at the top of the page
- Use Sagas for API requests to your server
+ Include a link to GitHub that opens in a new window....X
+ Add your name at the top of the page....X
+ Use Sagas for API requests to your server..>>X
  *********COMPONENTS********
-a- Project Item
-b- Project List
-c_ Project Form 
+a- Project Item....X
+b- Project List....X
+c_ Project Form....X
 
-2- Navigation Bar
+2- Navigation Bar....X
 
 The Nav bar will faciliatet user to navigate within the different pages. will have menu items
 *****COMPONENT**** 
-a- Navigation Bar
-b- .css file 
+a- Navigation Bar....X
+b- .css file .....X
 
 3- Admin Page
  Client side route that displays a form allowing you to add a new project to your portfolio
@@ -24,9 +24,9 @@ b- .css file
  Include a button that navigates to the project page
 
  ******* COMPONENTS*****
-a- ADMIN MAIN
- b- Admin Form
- c- Admin Project List / Table
+a- ADMIN MAIN....X
+ b- Admin Form.....X
+ c- Admin Project List / Table.....X
 
  
 
