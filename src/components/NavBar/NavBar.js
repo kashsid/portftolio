@@ -37,8 +37,8 @@ class ProjectNavBar extends Component {
                         <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
-                            My Github
+                        <Typography variant="h4" color="inherit" className={classes.grow}>
+                            My Github Portfolio
                         </Typography>
                     </Toolbar>
                 </AppBar>

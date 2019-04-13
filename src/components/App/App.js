@@ -3,6 +3,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 import ProjectMain from '../ProjectPage/ProjectMain';
+import Admin from '../Admin/Admin';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,6 +44,7 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <div>
             <Route exact path="/" component={ProjectMain} />
+            <Route exact path="/admin" component={Admin} />
           </div>
         </MuiThemeProvider>
       </Router>
