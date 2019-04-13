@@ -1,84 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@material-ui/icons/Error';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import MenuItem from '@material-ui/core/MenuItem';
 import classNames from 'classnames';
-import Snackbar from '@material-ui/core/Snackbar';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
-    
-    textField: {
-        // marginLeft: theme.spacing.unit,
-        // marginRight: theme.spacing.unit,
-        marginTop: 2,
-        marginBottom: 2,
-    },
-    menu: {
-        width: 200,
-    },
-    button: {
-        margin: 0,
-        width: 120,
-        float: 'right',
-    },
-    icon: {
-        fontSize: 20,
-        opacity: 0.9,
-        marginRight: theme.spacing.unit,
-    },
+  textField: {
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
+    marginTop: 2,
+    marginBottom: 2
+  },
+  menu: {
+    width: 200
+  },
+  button: {
+    margin: 0,
+    width: 120,
+    float: "right"
+  },
+  icon: {
+    fontSize: 20,
+    opacity: 0.9,
+    marginRight: theme.spacing.unit
+  }
 });
 
-
 class AdminForm extends Component {
+
     state = {
         name: '',
-        currency: '',
         selectedDate: new Date(),
-        currencies: [
-            {
-                value: 'React',
-                label: 'React',
-            },
-            {
-                value: 'Javascript',
-                label: 'Javascript',
-            },
-            {
-                value: 'Redux',
-                label: 'Redux',
-            },
-            {
-                value: 'jQuery',
-                label: 'jQuery',
-            },
-            {
-                value: 'Material-UI',
-                label: 'Material',
-            },
-            {
-                value: 'Bootstrap',
-                label: 'Bootstrap',
-            },
-        ],
         selectedTag: '',
         gitHubUrl: '',
         websiteUrl: '',
         description: '',
-    
-    }
-    componentDidMount = () => {
-        this.props.dispatch({ type: 'FETCH_TAGS' });
-        
     }
 
+    // send fetch dispatch to redux which will return all items from 'tags' table on database
+    componentDidMount = () => {
+        this.props.dispatch({ type: 'FETCH_TAGS' });
+    }
+
+    // handles on inputs on form and sets state
     handleChange = (property) => (event) => {
         this.setState({
             ...this.state,
@@ -86,8 +59,8 @@ class AdminForm extends Component {
         });
     }
 
+    // handles form submit button, sends post dispatch to redux with payload of all selected form inputs + clears form 
     handleSubmit = () => {
-        // your submit logic
         this.props.dispatch({ type: 'POST_PROJECT', payload: this.state });
         this.setState({
             name: '',
@@ -99,20 +72,17 @@ class AdminForm extends Component {
         });
     }
 
-
+    // handles date select from date-picker
     handleDateChange = date => {
         this.setState({
             selectedDate: date
         });
     };
 
-    handleClose = () => {
-        this.props.dispatch({ type: 'RESET_POST' })
-    };
+
+    // determines which message will display on snackbar depending if post to database was successful  
     alertMessage = () => {
         const { classes } = this.props;
-        // console.log('confirmPost', this.props.confirmPost);
-
         if (this.props.confirmPost.status) {
             return <span id="message-id" style={{ display: 'flex', alignItems: 'center' }}>
                 <CheckCircleIcon className={classes.icon} />Project Successfully Added!</span>
@@ -122,12 +92,19 @@ class AdminForm extends Component {
                 <ErrorIcon className={classes.icon} />Project add was unsuccessful</span>
         }
     }
-    // Renders the entire app on the DOM
+
+    // handles close from snackbar and sends reset dispatch to redux  
+    handleClose = () => {
+        this.props.dispatch({ type: 'RESET_POST' })
+    };
+
+
     render() {
         const { classes } = this.props;
 
         return (
             <>
+                <Typography><h2>Add New Project</h2></Typography>
                 <ValidatorForm
                     ref="form"
                     onSubmit={this.handleSubmit}
@@ -158,8 +135,6 @@ class AdminForm extends Component {
                                     fullWidth
                                     value={this.state.selectedDate}
                                     onChange={this.handleDateChange}
-                                    // validators={['required']}
-                                    // errorMessages={['this field is required']}
                                     className={classNames(classes.textField)}
                                     variant="outlined"
                                 />
@@ -179,7 +154,6 @@ class AdminForm extends Component {
                                         className: classes.menu,
                                     },
                                 }}
-                                // helperText="Please select your currency"
                                 validators={['required']}
                                 errorMessages={['this field is required']}
                                 margin="normal"
@@ -202,6 +176,7 @@ class AdminForm extends Component {
                                 name="gitHubUrl"
                                 type="url"
                                 margin="normal"
+                                // helperText="*required"
                                 value={this.state.gitHubUrl}
                                 validators={['required']}
                                 errorMessages={['this field is required']}
@@ -234,7 +209,6 @@ class AdminForm extends Component {
                                 onChange={this.handleChange('description')}
                                 className={classes.textField}
                                 margin="normal"
-                                // helperText="hello"
                                 variant="outlined"
                             />
                         </Grid>
@@ -270,16 +244,8 @@ class AdminForm extends Component {
         );
     }
 }
-
-
-// AdminForm.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
-
-
 const mapReduxStateToProps = (reduxState) => {
     return reduxState;
 }
-
 
 export default withStyles(styles)(connect(mapReduxStateToProps)(AdminForm));
