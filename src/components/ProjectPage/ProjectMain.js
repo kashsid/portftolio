@@ -4,6 +4,7 @@ import './ProjectPage.css';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import ProjectList from './ProjectList';
 
 const styles = {
     root: {
@@ -30,7 +31,7 @@ class ProjectPage extends Component {
                 </div>
                 <div className="hero-content">
                     {/* <div className="github-logo"><img src="/images/GitHub-Mark-Light-120px-plus.png" alt="github logo" /> */}
-                        <Typography variant="h6" color="inherit" className={classes.grow}><h2>KASHIF SIDDIQUI</h2></Typography>
+                        <Typography variant="h5" color="inherit" className={classes.grow}><h2>KASHIF SIDDIQUI</h2></Typography>
                     </div>
 
                 
