@@ -14,15 +14,13 @@ import Chip from "@material-ui/core/Chip";
 import './ProjectItem.css';
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 0
-  },
+  
   card: {
-    maxWidth: 400,
-    // minHeight: 375,
-   // backgroundColor: "rgba(51, 171, 159, 0.323)"
-    backgroundColor: "#a5d6a7"
+    
+    backgroundColor: "RGBA(59,255,0,0.68)"
+    //backgroundColor: "rgba(79, 213, 40, 0.15)"
+    //backgroundColor:"RGBA(59,255,0,0.73)"
+    
   },
   media: {
     height: 0,
@@ -31,16 +29,17 @@ const styles = theme => ({
   actions: {
     display: "flex"
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(0deg)"
-  },
+  //  for my stretch goals may be
+  // expand: {
+  //   transform: "rotate(0deg)",
+  //   marginLeft: "auto",
+  //   transition: theme.transitions.create("transform", {
+  //     duration: theme.transitions.duration.shortest
+  //   })
+  // },
+  // expandOpen: {
+  //   transform: "rotate(0deg)"
+  // },
   avatar: {
     backgroundColor: "#33ab9f"
   }
