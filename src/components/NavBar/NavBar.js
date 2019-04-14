@@ -72,7 +72,7 @@ class NavBar extends Component {
               </MenuItem>
             </Menu>
             <Typography variant="h4" color="inherit" className={classes.grow}>
-              My Github Portfolio
+              My Full Stack Portfolio
             </Typography>
           </Toolbar>
         </AppBar>
