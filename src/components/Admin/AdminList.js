@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+// Material UI imports
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,6 +17,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+// defined custom table to be used with Material UI
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.primary.main,
@@ -27,6 +29,7 @@ const CustomTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
+// Defined styles for MUI
 const styles = theme => ({
   root: {
     width: "100%",
@@ -45,11 +48,11 @@ class AdminList extends Component {
     open: false,
     selectedId: ""
   };
-
+  // send fetch dispatch to redux which will return all items from 'Projects' table on database
   componentDidMount = () => {
     this.props.dispatch({ type: "FETCH_PROJECTS" });
   };
-
+  // Handle delete button click action to delete the selected project from table
   handleDeleteClick = id => () => {
     console.log("delete click for id", id);
     this.setState({
@@ -57,6 +60,7 @@ class AdminList extends Component {
       selectedId: id
     });
   };
+  // shows confirmation message before deleting the project from database
   deleteDialog = () => {
     return (
       <Dialog
@@ -103,6 +107,7 @@ class AdminList extends Component {
       selectedId: ""
     });
   };
+
   render() {
     const { classes } = this.props;
 

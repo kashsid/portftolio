@@ -3,7 +3,6 @@ import NavBar from "../NavBar/NavBar";
 import "./ProjectPage.css";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-//import PropTypes from 'prop-types';
 import ProjectList from "./ProjectList";
 
 const styles = {

@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
 
-// will return all items from "projects" table on database ordered ascending by "date"
+// will return data from project and tags table and join by id to get every project's tag"
 router.get("/", (req, res) => {
-  pool.query(`SELECT "projects"."id","projects"."name", "description", "thumbnail", "website", "github", "date_completed", "tag_id", "tags"."name" as "tag_name" FROM "projects"
+  pool
+    .query(
+      `SELECT "projects"."id","projects"."name", "description", "thumbnail", "website", "github", "date_completed", "tag_id", "tags"."name" as "tag_name" FROM "projects"
     JOIN "tags" ON "tags"."id"="tag_id"
-    ORDER BY "date_completed" DESC;`)
+    ORDER BY "date_completed" DESC;`
+    )
     .then(result => {
       projects = result.rows;
       console.log(projects);
@@ -43,7 +46,7 @@ router.post("/", (req, res) => {
       res.sendStatus(500);
     });
 });
-
+// Will delete the project for the supplied id
 router.delete("/:id", (req, res) => {
   console.log(req.params.id);
   pool

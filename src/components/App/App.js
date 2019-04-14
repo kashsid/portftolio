@@ -5,14 +5,11 @@ import "./App.css";
 import ProjectMain from "../ProjectPage/ProjectMain";
 import Admin from "../Admin/Admin";
 
+// initalize the material UI theme to be used and define the primary color of the theme
 const theme = createMuiTheme({
   palette: {
     primary: {
-      //light: "#33ab9f", #1c5193
-      //main: "#009688", #004396
-      //dark: "#00695f",
       light: "#4caf50",
-      //main: "#004396",
       main: "#388e3c",
       dark: "#1b5e20",
       contrastText: "#fff"

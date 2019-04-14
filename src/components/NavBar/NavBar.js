@@ -11,6 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+// Defines the styles to be used with MUI
 const styles = {
   root: {
     flexGrow: 1
@@ -32,7 +33,7 @@ class NavBar extends Component {
   state = {
     anchorEl: null
   };
-
+  // handle click action on menu items to route the user on correct target page
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };

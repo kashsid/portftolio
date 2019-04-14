@@ -11,16 +11,12 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
-import './ProjectItem.css';
+import "./ProjectItem.css";
 
+// defines the cards theme and styles
 const styles = theme => ({
-  
   card: {
-    
     backgroundColor: "RGBA(59,255,0,0.68)"
-    //backgroundColor: "rgba(79, 213, 40, 0.15)"
-    //backgroundColor:"RGBA(59,255,0,0.73)"
-    
   },
   media: {
     height: 0,
@@ -72,24 +68,23 @@ class ProjectItem extends Component {
   toggleHeart = () => {
     if (!this.state.heartToggle) {
       this.setState({
-        heartToggle: true,
-      })
+        heartToggle: true
+      });
     } else {
       this.setState({
-        heartToggle: false,
-      })
+        heartToggle: false
+      });
     }
-  }
+  };
 
   // outputs version of heart icon to DOM based on current state of 'heartToggle'
   displayHeart = () => {
     if (this.state.heartToggle) {
-      return <FavoriteIcon style={{ color: '#d50000' }} />
+      return <FavoriteIcon style={{ color: "#d50000" }} />;
+    } else {
+      return <FavoriteIcon />;
     }
-    else {
-      return <FavoriteIcon />
-    }
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -99,8 +94,12 @@ class ProjectItem extends Component {
         <Card className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar style={{ marginRight: '-49px' }} aria-label="initials" className={classes.avatar} src="/images/kash.png">
-              </Avatar>
+              <Avatar
+                style={{ marginRight: "-49px" }}
+                aria-label="initials"
+                className={classes.avatar}
+                src="/images/kash.png"
+              />
             }
             // for potential future use
             // action={
@@ -113,29 +112,47 @@ class ProjectItem extends Component {
           />
           <div className="card-image">
             <CardMedia
-              style={{ height: '60px' }}
+              style={{ height: "60px" }}
               className={classes.media}
               image={this.props.project.thumbnail}
               title={this.props.project.name}
             />
           </div>
-          <CardContent style={{ marginTop: '3px', marginBottom: '3px', height: '90px' }}>
+          <CardContent
+            style={{ marginTop: "3px", marginBottom: "3px", height: "90px" }}
+          >
             <Typography component="p">
               {this.props.project.description}
             </Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites" onClick={this.toggleHeart}>
+            <IconButton
+              aria-label="Add to favorites"
+              onClick={this.toggleHeart}
+            >
               {this.displayHeart()}
             </IconButton>
-            <IconButton aria-label="github" >
-              <a href={!this.props.project.github ? "https://github.com" : this.props.project.github}
-                target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github fa-lg"></i>
+            <IconButton aria-label="github">
+              <a
+                href={
+                  !this.props.project.github
+                    ? "https://github.com"
+                    : this.props.project.github
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-github fa-lg" />
               </a>
             </IconButton>
-            <Typography style={{ marginRight: '8px', marginLeft: '4px' }}>tags: </Typography>
-            <Chip label={this.props.project.tag_name} className={classes.chip} variant="outlined" />
+            <Typography style={{ marginRight: "8px", marginLeft: "4px" }}>
+              tags:{" "}
+            </Typography>
+            <Chip
+              label={this.props.project.tag_name}
+              className={classes.chip}
+              variant="outlined"
+            />
             {/* 
                             // for potential future use
                             <IconButton
@@ -148,7 +165,6 @@ class ProjectItem extends Component {
                         >
                             <ExpandMoreIcon />
                         </IconButton> */}
-
           </CardActions>
           {/* 
                         // for potential future use
@@ -168,6 +184,5 @@ class ProjectItem extends Component {
     );
   }
 }
-
 
 export default withStyles(styles)(ProjectItem);
