@@ -1,3 +1,11 @@
+# MY FULL STACK PORTFOLIO
+
+#Overview
+
+The goal of this project is to showcase all the full stack technologies and knowledge that i have learned at Prime.
+i developed this project using react redux and sagas. for front end styling i used material UI and for backend database i used postgres database. 
+
+
 # React Redux with Sagas
 
 For this weekend challenge, you'll be building a portfolio site to showcase your work. 
